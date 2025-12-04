@@ -31,3 +31,7 @@ ENV/
 *.swo
 *~
 
+# macOS hidden files
+.DS_Store
+**/.DS_Store
+
