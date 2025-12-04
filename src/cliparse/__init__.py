@@ -23,7 +23,7 @@ from .registry import (
     ScriptRegistry,
     ScriptMetadata,
     ExecutionResult,
-    BatchResults
+    BatchResults,
 )
 from .formatting import (
     RICH_AVAILABLE,
@@ -59,46 +59,40 @@ __version__ = "0.1.0"
 
 __all__ = [
     # Parser
-    'BaseParser',
-    'create_parser',
-
+    "BaseParser",
+    "create_parser",
     # Registry
-    'register_script',
-    'Coordinator',
-    'ScriptRegistry',
-    'ScriptMetadata',
-
+    "register_script",
+    "Coordinator",
+    "ScriptRegistry",
+    "ScriptMetadata",
     # Results
-    'ExecutionResult',
-    'BatchResults',
-
+    "ExecutionResult",
+    "BatchResults",
     # Formatting
-    'RICH_AVAILABLE',
-    'get_console',
-    'emit',
-    'success',
-    'error',
-    'warning',
-    'info',
-    'status_message',
-    'print_success',
-    'print_error',
-    'print_warning',
-    'print_info',
-
+    "RICH_AVAILABLE",
+    "get_console",
+    "emit",
+    "success",
+    "error",
+    "warning",
+    "info",
+    "status_message",
+    "print_success",
+    "print_error",
+    "print_warning",
+    "print_info",
     # Errors
-    'CliparseError',
-    'ValidationError',
-    'ParseError',
-    'ConfigurationError',
-    'ExitCode',
-    'format_error',
-
+    "CliparseError",
+    "ValidationError",
+    "ParseError",
+    "ConfigurationError",
+    "ExitCode",
+    "format_error",
     # Logging
-    'Verbosity',
-    'VERBOSITY_TO_LEVEL',
-    'setup_logger',
-    'setup_logger_from_verbosity',
-    'get_logger',
+    "Verbosity",
+    "VERBOSITY_TO_LEVEL",
+    "setup_logger",
+    "setup_logger_from_verbosity",
+    "get_logger",
 ]
-

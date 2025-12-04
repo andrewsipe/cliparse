@@ -1,19 +1,19 @@
 """
 Example script A - processes fonts.
 """
+
 from cliparse import BaseParser, register_script
 
 
 @register_script(
-    name='process-fonts',
-    description='Process font metadata',
-    supports=['-R', '--recursive', '-v', '--verbose', '--dry-run', '--format']
+    name="process-fonts",
+    description="Process font metadata",
+    supports=["-R", "--recursive", "-v", "--verbose", "--dry-run", "--format"],
 )
 def create_parser():
     parser = BaseParser(description="Process font files")
-    parser.add_argument('files', nargs='+', help='Font files to process')
-    parser.add_argument('--format', choices=['otf', 'ttf'],
-                       help='Font format filter')
+    parser.add_argument("files", nargs="+", help="Font files to process")
+    parser.add_argument("--format", choices=["otf", "ttf"], help="Font format filter")
     return parser
 
 
@@ -36,8 +36,7 @@ def main(args):
         print("[Script A] Complete")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = create_parser()
     args = parser.parse_args()
     main(args)
-

@@ -1,6 +1,7 @@
 """
 Batch runner example - runs multiple scripts with flag filtering.
 """
+
 import sys
 from cliparse import BaseParser, Coordinator
 
@@ -9,23 +10,22 @@ def main():
     # Parse batch-level arguments
     parser = BaseParser(
         description="Batch font processor - runs multiple scripts",
-        epilog="Example: python runner.py --scripts all fonts/*.ttf -R -v"
+        epilog="Example: python runner.py --scripts all fonts/*.ttf -R -v",
     )
 
-    parser.add_argument('--scripts', default='all',
-                       help='Comma-separated script names or "all"')
-    parser.add_argument('--list', action='store_true',
-                       help='List available scripts and exit')
+    parser.add_argument(
+        "--scripts", default="all", help='Comma-separated script names or "all"'
+    )
+    parser.add_argument(
+        "--list", action="store_true", help="List available scripts and exit"
+    )
 
     # Parse known args, keep the rest for scripts
     args, remaining = parser.parse_known_args()
 
     # Create coordinator and load scripts
     coordinator = Coordinator()
-    coordinator.load_scripts([
-        'script_a',
-        'script_b'
-    ])
+    coordinator.load_scripts(["script_a", "script_b"])
 
     # List scripts if requested
     if args.list:
@@ -37,10 +37,10 @@ def main():
         return
 
     # Determine which scripts to run
-    if args.scripts == 'all':
+    if args.scripts == "all":
         script_names = coordinator.list_scripts()
     else:
-        script_names = [s.strip() for s in args.scripts.split(',')]
+        script_names = [s.strip() for s in args.scripts.split(",")]
 
     if args.verbose:
         print(f"Running scripts: {', '.join(script_names)}")
@@ -48,10 +48,7 @@ def main():
         print()
 
     # Execute scripts
-    results = coordinator.run(
-        scripts=script_names,
-        args=remaining
-    )
+    results = coordinator.run(scripts=script_names, args=remaining)
 
     # Print results
     print()
@@ -61,6 +58,5 @@ def main():
     sys.exit(0 if results.all_success else 1)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-

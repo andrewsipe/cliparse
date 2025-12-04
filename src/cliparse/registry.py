@@ -1,6 +1,7 @@
 """
 Script registry and coordination system for multi-script projects.
 """
+
 import sys
 import importlib
 from typing import Dict, List, Optional, Callable, Any, Set
@@ -11,6 +12,7 @@ from pathlib import Path
 @dataclass
 class ScriptMetadata:
     """Metadata for a registered script."""
+
     name: str
     description: str
     parser_factory: Callable
@@ -28,6 +30,7 @@ class ScriptRegistry:
 
     Singleton pattern - all registrations go to the same registry.
     """
+
     _instance = None
     _scripts: Dict[str, ScriptMetadata] = {}
 
@@ -42,7 +45,7 @@ class ScriptRegistry:
         name: str,
         description: str,
         parser_factory: Callable,
-        supported_flags: List[str]
+        supported_flags: List[str],
     ) -> None:
         """
         Register a script with metadata.
@@ -57,7 +60,7 @@ class ScriptRegistry:
             name=name,
             description=description,
             parser_factory=parser_factory,
-            supported_flags=set(supported_flags)
+            supported_flags=set(supported_flags),
         )
         cls._scripts[name] = metadata
 
@@ -83,9 +86,7 @@ class ScriptRegistry:
 
 
 def register_script(
-    name: str,
-    description: Optional[str] = None,
-    supports: Optional[List[str]] = None
+    name: str, description: Optional[str] = None, supports: Optional[List[str]] = None
 ):
     """
     Decorator to register a script parser factory.
@@ -106,6 +107,7 @@ def register_script(
             parser.add_argument('--format', choices=['otf', 'ttf'])
             return parser
     """
+
     def decorator(parser_factory: Callable):
         # Get description from parser if not provided
         desc = description
@@ -118,7 +120,7 @@ def register_script(
             name=name,
             description=desc,
             parser_factory=parser_factory,
-            supported_flags=supports or []
+            supported_flags=supports or [],
         )
 
         return parser_factory
@@ -129,6 +131,7 @@ def register_script(
 @dataclass
 class ExecutionResult:
     """Result from executing a script."""
+
     script_name: str
     success: bool
     exit_code: int = 0
@@ -138,6 +141,7 @@ class ExecutionResult:
 @dataclass
 class BatchResults:
     """Aggregated results from batch execution."""
+
     results: List[ExecutionResult] = field(default_factory=list)
 
     @property
@@ -196,7 +200,9 @@ class Coordinator:
             except ImportError as e:
                 print(f"Warning: Could not import {module_path}: {e}", file=sys.stderr)
 
-    def load_scripts_from_directory(self, directory: str, pattern: str = "*Replacer.py") -> None:
+    def load_scripts_from_directory(
+        self, directory: str, pattern: str = "*Replacer.py"
+    ) -> None:
         """
         Load scripts from a directory by importing Python files.
 
@@ -207,7 +213,7 @@ class Coordinator:
         dir_path = Path(directory)
 
         for script_file in dir_path.glob(pattern):
-            if script_file.stem.startswith('_'):
+            if script_file.stem.startswith("_"):
                 continue
 
             # Import the module
@@ -221,9 +227,7 @@ class Coordinator:
                 print(f"Warning: Could not load {script_file}: {e}", file=sys.stderr)
 
     def filter_args_for_script(
-        self,
-        script_name: str,
-        all_args: List[str]
+        self, script_name: str, all_args: List[str]
     ) -> List[str]:
         """
         Filter command-line arguments for a specific script.
@@ -250,10 +254,10 @@ class Coordinator:
                 continue
 
             # Check if this is a flag
-            if arg.startswith('-'):
+            if arg.startswith("-"):
                 # Handle --flag=value format
-                if '=' in arg:
-                    flag = arg.split('=')[0]
+                if "=" in arg:
+                    flag = arg.split("=")[0]
                     if script.supports_flag(flag):
                         filtered.append(arg)
                 # Handle -flag value format
@@ -261,12 +265,16 @@ class Coordinator:
                     if script.supports_flag(arg):
                         filtered.append(arg)
                         # Check if next arg is a value (not a flag)
-                        if i + 1 < len(all_args) and not all_args[i + 1].startswith('-'):
+                        if i + 1 < len(all_args) and not all_args[i + 1].startswith(
+                            "-"
+                        ):
                             filtered.append(all_args[i + 1])
                             skip_next = True
                     else:
                         # Flag not supported - skip it and its value if present
-                        if i + 1 < len(all_args) and not all_args[i + 1].startswith('-'):
+                        if i + 1 < len(all_args) and not all_args[i + 1].startswith(
+                            "-"
+                        ):
                             skip_next = True
             else:
                 # Positional argument - always include
@@ -274,11 +282,7 @@ class Coordinator:
 
         return filtered
 
-    def run(
-        self,
-        scripts: List[str],
-        args: Optional[List[str]] = None
-    ) -> BatchResults:
+    def run(self, scripts: List[str], args: Optional[List[str]] = None) -> BatchResults:
         """
         Run multiple scripts with filtered arguments.
 
@@ -301,9 +305,7 @@ class Coordinator:
         return results
 
     def _run_single_script(
-        self,
-        script_name: str,
-        all_args: List[str]
+        self, script_name: str, all_args: List[str]
     ) -> ExecutionResult:
         """Run a single script with filtered arguments."""
         script = self.registry.get(script_name)
@@ -313,7 +315,7 @@ class Coordinator:
                 script_name=script_name,
                 success=False,
                 exit_code=1,
-                error_message=f"Script not found: {script_name}"
+                error_message=f"Script not found: {script_name}",
             )
 
         try:
@@ -326,25 +328,21 @@ class Coordinator:
 
             # Success - script would run with these args
             # (In real usage, you'd call the script's main function here)
-            return ExecutionResult(
-                script_name=script_name,
-                success=True,
-                exit_code=0
-            )
+            return ExecutionResult(script_name=script_name, success=True, exit_code=0)
 
         except SystemExit as e:
             return ExecutionResult(
                 script_name=script_name,
                 success=False,
                 exit_code=e.code,
-                error_message="Argument parsing failed"
+                error_message="Argument parsing failed",
             )
         except Exception as e:
             return ExecutionResult(
                 script_name=script_name,
                 success=False,
                 exit_code=1,
-                error_message=str(e)
+                error_message=str(e),
             )
 
     def list_scripts(self) -> List[str]:
@@ -354,4 +352,3 @@ class Coordinator:
     def get_script_info(self, script_name: str) -> Optional[ScriptMetadata]:
         """Get metadata for a script."""
         return self.registry.get(script_name)
-

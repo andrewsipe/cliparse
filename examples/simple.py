@@ -1,19 +1,21 @@
 """
 Simple example of using BaseParser.
 """
+
 from cliparse import BaseParser
 
 
 def main():
     parser = BaseParser(
         description="Process files with standard options",
-        epilog="Example: python simple.py files/*.txt -R --dry-run"
+        epilog="Example: python simple.py files/*.txt -R --dry-run",
     )
 
     # Add custom arguments
-    parser.add_argument('files', nargs='+', help='Files to process')
-    parser.add_argument('--format', choices=['json', 'xml'], default='json',
-                       help='Output format')
+    parser.add_argument("files", nargs="+", help="Files to process")
+    parser.add_argument(
+        "--format", choices=["json", "xml"], default="json", help="Output format"
+    )
 
     args = parser.parse_args()
 
@@ -39,6 +41,5 @@ def main():
         print("Processing complete")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
