@@ -1,0 +1,42 @@
+# Root directory
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/README.md
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/pyproject.toml
+
+# examples/
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/examples/simple.py
+
+# examples/batch/
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/examples/batch/runner.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/examples/batch/script_a.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/examples/batch/script_b.py
+
+# src/cliparse/
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/src/cliparse/__init__.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/src/cliparse/errors.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/src/cliparse/formatting.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/src/cliparse/logging.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/src/cliparse/parser.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/src/cliparse/registry.py
+
+# tests/
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/tests/test_parser.py
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/tests/test_registry.py
+
+# FontCore/
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/CoreDemoTool.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/README.md
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/__init__.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_console_styles.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_error_handling.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_file_collector.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_filename_parts_parser.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_font_sorter.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_font_style_dictionaries.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_logging_config.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_name_policies.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_nameid_replacer_base.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_namerecord_matcher.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_string_utils.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_ttx_table_io.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/core_variable_font_detection.py
+https://raw.githubusercontent.com/andrewsipe/FontCore/main/requirements.txt
