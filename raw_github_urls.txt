@@ -1,4 +1,6 @@
 # Root directory
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/.gitmodules
+https://raw.githubusercontent.com/andrewsipe/cliparse/main/FontCore
 https://raw.githubusercontent.com/andrewsipe/cliparse/main/README.md
 https://raw.githubusercontent.com/andrewsipe/cliparse/main/pyproject.toml
 
